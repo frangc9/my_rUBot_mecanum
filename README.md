@@ -9,3 +9,4 @@ In this ROS2 repository we design, simulate and control different robots:
 
 Moritz was here.
 Clàudia was here.
+Pol was indeed also here.
