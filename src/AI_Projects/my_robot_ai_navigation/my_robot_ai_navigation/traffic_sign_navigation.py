@@ -42,7 +42,9 @@ class TrafficSignNavigation(Node):
 
     def sign_callback(self, msg):
         # TODO 2: While accept_sign is True, store the sign in lower case.
-        pass
+        if self.accept_sign:
+            self.detected_sign = msg.data.strip().lower()
+            self.get_logger().info(f'Traffic sign received: {self.detected_sign}')
 
     def create_pose(self, values):
         x, y, yaw = values
