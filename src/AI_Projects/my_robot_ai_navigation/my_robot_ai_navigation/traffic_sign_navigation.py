@@ -42,7 +42,7 @@ class TrafficSignNavigation(Node):
 
     def sign_callback(self, msg):
         # TODO 2: While accept_sign is True, store the sign in lower case.
-        if self.accept_sign:
+        if self.accept_sign and self.detected_sign is None:
             self.detected_sign = msg.data.strip().lower()
             self.get_logger().info(f'Traffic sign received: {self.detected_sign}')
 
@@ -74,6 +74,8 @@ class TrafficSignNavigation(Node):
         self.get_logger().info('Waiting for a traffic sign on /traffic_sign ...')
 
         # TODO 3: Process callbacks until detected_sign is not None.
+        while self.detected_sign is None:
+            rclpy.spin_once(self, timeout_sec=0.1)
 
         self.accept_sign = False
         return self.detected_sign
