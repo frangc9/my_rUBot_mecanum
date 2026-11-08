@@ -87,7 +87,19 @@ class TrafficSignNavigation(Node):
         self.go_to(self.inspection_pose, 'inspection pose')
         sign = self.wait_for_sign()
 
-        # TODO 4: Implement left, right, stop and unknown-sign behaviour.
+        # Action selection based on received sign
+if sign == 'left':
+    self.go_to(self.left_waypoint, 'left waypoint')
+    self.go_to(self.final_pose, 'final pose')
+elif sign == 'right':
+    self.go_to(self.right_waypoint, 'right waypoint')
+    self.go_to(self.final_pose, 'final pose')
+elif sign == 'stop':
+    self.get_logger().info(f'Waiting {self.stop_duration} seconds at inspection pose')
+    time.sleep(self.stop_duration)
+    self.go_to(self.final_pose, 'final pose')
+else:
+    self.get_logger().info(f'Unknown sign "{sign}": staying at inspection pose')
 
 
 def main(args=None):
